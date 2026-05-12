@@ -1,14 +1,15 @@
-import { Component, input } from '@angular/core';
-import { InvestmentOutput } from '../investment-input.model';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-investment-results',
   imports: [CommonModule, CurrencyPipe],
   templateUrl: './investment-results.component.html',
-  styleUrl: './investment-results.component.css'
+  styleUrl: './investment-results.component.css',
 })
 export class InvestmentResultsComponent {
-  results = input<InvestmentOutput[]>();
+  public investmentService = inject(InvestmentService);
 
+  results = computed(() => this.investmentService.resultData());
 }
